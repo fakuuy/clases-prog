@@ -1,7 +1,8 @@
 import Administrador from "../data/Administrador";
-import Solicitante from "../data/Solicitante";
-import Tecnico from "../data/Tecnico";
 import { nivelesValidos } from "../data/Administrador";
+import Solicitante from "../data/Solicitante";
+import { mostrarSectores } from "../data/Solicitante";
+import Tecnico from "../data/Tecnico";
 
 const tipos_usuario = ["Administrador", "Solicitante", "Tecnico"];
 
@@ -14,7 +15,8 @@ function crearUsuario(){
     const mail: string = prompt("Correo electrónico del usuario: ") || "";
 
     if (isNaN(edad) || edad <= 0) {
-        throw new Error("La edad debe ser un número positivo.");
+        console.error("Edad no válida. Por favor, ingrese un número mayor a 0.");
+        return;
     }
     let usuario: any;
 
@@ -32,10 +34,19 @@ function crearUsuario(){
             break;
         case "Solicitante":
             const sector: string = prompt("Sector del solicitante: ") || "";
+
+            if (!mostrarSectores().includes(sector)) {
+                console.error("Sector no válido. Los sectores válidos son: " + mostrarSectores().join(", "));
+                return;
+            }
             usuario = new Solicitante(nombre, apellido, edad, mail, sector);
             break;
         case "Tecnico":
             const especialidad: string = prompt("Especialidad del técnico: ") || "";
+            if (!especialidad) {
+                console.error("Error: La especialidad no puede estar vacía.");
+                return;
+            }
             usuario = new Tecnico(nombre, apellido, edad, mail, especialidad);
             break;
         default:

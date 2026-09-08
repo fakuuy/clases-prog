@@ -12,25 +12,29 @@ class Usuario {
 
 
         if (this.edad < 18) {
-            throw new Error("El usuario debe ser mayor de edad.");
+            console.error("Error: El usuario debe ser mayor de edad.");
+            return;
         }
 
         if (!this.mail.includes("@")) {
-            throw new Error("El correo electrónico no es válido.");
+            console.error("Error: El correo electrónico no es válido.");
+            return;
         }
 
-        if (this.apellido.length < 0) {
-            throw new Error("El apellido no puede estar vacío.");
+        if (this.apellido.trim() == "") {
+            console.error("Error: El apellido no puede estar vacío.");
+            return;
         }
 
-        if (this.nombre.length < 0) {
-            throw new Error("El nombre no puede estar vacío.");
+        if (this.nombre.trim() == "") {
+            console.error("Error: El nombre no puede estar vacío.");
+            return;
         }
 
     }
 
     public getNombre(): string {
-        return this.nombre;
+        return this.nombre; 
     }
 
     public getEdad(): number {
@@ -47,30 +51,38 @@ class Usuario {
 
     public setNombre(nombre: string): void {
         if (nombre.length < 0) {
-            throw new Error("El nombre no puede estar vacío.");
+            console.error("Error: El nombre no puede estar vacío.");
+            return;
         }
         this.nombre = nombre;
+        console.log(`El nombre de ${this.getNombre()} se ha actualizado a: ${nombre}`);
     }
 
     public setEdad(edad: number): void {
         if (edad < 18) {
-            throw new Error("El usuario debe ser mayor de edad.");
+            console.error("Error: El usuario debe ser mayor de edad.");
+            return;
         }
         this.edad = edad;
+        console.log(`La edad de ${this.getNombre()} se ha actualizado a: ${edad}`);
     }
 
     public setMail(mail: string): void {
         if (!mail.includes("@")) {
-            throw new Error("El correo electrónico no es válido.");
+            console.error("Error: El correo electrónico no es válido.");
+            return;
         }
         this.mail = mail;
+        console.log(`El correo electrónico de ${this.getNombre()} se ha actualizado a: ${mail}`);
     }
 
     public setApellido(apellido: string): void {
         if (apellido.length < 0) {
-            throw new Error("El apellido no puede estar vacío.");
+            console.error("Error: El apellido no puede estar vacío.");
+            return;
         }
         this.apellido = apellido;
+        console.log(`El apellido de ${this.getNombre()} se ha actualizado a: ${apellido}`);
     }
 
     public mostrarInformacion(): void {

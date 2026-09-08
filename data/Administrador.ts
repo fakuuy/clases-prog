@@ -13,7 +13,8 @@ class Administrador extends Usuario {
         this.nivel = nivel;
 
         if (!niveles.includes(this.nivel)) {
-            throw new Error("El nivel no es válido.");
+            console.error(`Error: El nivel "${this.nivel}" no es válido. Los niveles válidos son: ${niveles.join(", ")}`);
+            return;
         }
     }
 
@@ -23,7 +24,8 @@ class Administrador extends Usuario {
 
     public setNivel(nivel: string): void {
         if (!niveles.includes(nivel)) {
-            throw new Error("El nivel no es válido.");
+            console.error(`Error: El nivel "${nivel}" no es válido. Los niveles válidos son: ${niveles.join(", ")}`);
+            return;
         }
         this.nivel = nivel;
     }
@@ -37,6 +39,7 @@ class Administrador extends Usuario {
         console.log(`Edad: ${this.getEdad()}`);
         console.log(`Correo electrónico: ${this.getMail()}`);
         console.log(`Apellido: ${this.getApellido()}`);
+        console.log(`Nivel: ${this.getNivel()}`);
     }
 }
 
